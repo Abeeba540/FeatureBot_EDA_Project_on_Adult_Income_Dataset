@@ -1,0 +1,10 @@
+feature_id,feature_name,definition,feature_type,dependencies,added_in_cycle,deployed,reason_for_inclusion,fairness_implications
+1,age_education_interaction,age * educational_num,numeric_interaction,"age, educational_num",1,True,Captures combined effect of age and education on income,Neutral
+2,capital_net,capital_gain - capital_loss,numeric_derived,"capital_gain, capital_loss",1,True,Net investment returns; handles skewed gains/losses,Neutral
+3,has_capital_gain,1 if capital_gain > 0 else 0,binary_indicator,capital_gain,1,True,Presence of any investment income,Neutral
+4,has_capital_loss,1 if capital_loss > 0 else 0,binary_indicator,capital_loss,1,True,Presence of any investment loss,Neutral
+5,is_overtime,1 if hours_per_week > 40 else 0,binary_indicator,hours_per_week,1,True,Separates regular vs overtime workers,Medium risk – may disadvantage part-time workers
+6,education_bucket,Grouped education levels into HS_or_less / Some_college / Bachelors / Advanced,categorical_grouped,education,1,True,Reduces dimensionality while preserving education signal,Low risk – education grouping
+7,is_professional,"1 if occupation in {Prof-specialty, Exec-managerial, Protective-serv, Tech-support} else 0",binary_indicator,occupation,2,True,Professional roles are strongly predictive of high income,Medium risk – occupational gender imbalance
+8,professional_overtime,is_professional * is_overtime,binary_interaction,"is_professional, is_overtime",2,True,Very strong signal for high income among professionals,Medium risk – combines two medium-risk features
+9,hours_bin,Binned hours_per_week into 4 categories,categorical_binned,hours_per_week,2,True,Targets false negatives via hours patterns,Medium risk – may disadvantage part-time workers by gender

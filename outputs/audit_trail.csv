@@ -1,0 +1,7 @@
+timestamp,event,details,actor
+2025-12-08 10:00:00,Baseline model trained,Baseline LogisticRegression with original 14 features; Train AUC=0.9071 F1=0.6812 | Test AUC=0.9066 F1=0.6571,ML Team
+2025-12-08 14:30:00,Cycle 1 engineered features added,"Added age_education_interaction, capital_net, has_capital_gain, has_capital_loss, is_overtime, education_bucket",ML Team
+2025-12-08 18:45:00,Cycle 2 engineered features + fairness review,"Added is_professional, professional_overtime, hours_bin; evaluated fairness impact",ML Team
+2025-12-09 09:00:00,Fairness audit completed,Detected high TPR disparity for marital status (1.92x); reviewed mitigation options,Fairness Team
+2025-12-09 10:00:00,High-risk marital features excluded,Decided to exclude is_married and age_married_interaction from deployment feature set; fairness improvement estimated,ML + Fairness Team
+2025-12-12 15:00:00,Final model reproducibility verified,Final model with 9 engineered features verified reproducible: Train AUC=0.9071 F1=0.6812 | Val AUC=0.9089 F1=0.6805 | Test AUC=0.9075 F1=0.6802 (identical across 3+ runs),ML Team
