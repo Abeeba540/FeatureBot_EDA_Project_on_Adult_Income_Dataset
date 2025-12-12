@@ -100,8 +100,10 @@ numeric_transformer = Pipeline(steps=[
 
 categorical_transformer = Pipeline(steps=[
     ('imputer', SimpleImputer(strategy='most_frequent')),
-    ('onehot', OneHotEncoder(handle_unknown='ignore'))
+    ('onehot', OneHotEncoder(handle_unknown='ignore', sparse_output=False))
+    # NO random_state here
 ])
+
 
 preprocessor = ColumnTransformer(
     transformers=[
@@ -233,6 +235,7 @@ assert isinstance(preprocessor, ColumnTransformer), "Preprocessor is not a Colum
 print("✅ Preprocessor is a ColumnTransformer fitted via pipeline.fit(X_train, y_train)")
 print("✅ Val/Test are only passed through pipeline.predict / predict_proba (no extra fit)")
 print("✅ This matches: Fit on TRAIN, apply to VAL/TEST (no data leakage).")
+
 
 
 
