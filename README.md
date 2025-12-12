@@ -156,8 +156,8 @@ GitHub: https://github.com/Abeeba540
 ## Contact & Support
 
 Found a bug? Have suggestions?
-- Open an Issue: github.com/YOUR_USERNAME/featurebot-adult-income/issues
-- Start a Discussion: github.com/YOUR_USERNAME/featurebot-adult-income/discussions
+- Open an Issue: [github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset](https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset)/issues
+- Start a Discussion: [github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset](https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset)/discussions
 
 ---
 
