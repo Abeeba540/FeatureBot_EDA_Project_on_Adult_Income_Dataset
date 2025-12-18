@@ -1,6 +1,3 @@
-Here’s a ready-to-copy full `README.md` that includes your original content plus the modular CLI line and Developer API section.
-
-```markdown
 # FeatureBot: Adult Income Prediction with Feature Engineering
 
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
