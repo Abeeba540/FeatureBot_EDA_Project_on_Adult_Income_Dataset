@@ -83,6 +83,25 @@ Latest run should show: **✅ Reproducibility Tests #PASSED**
 
 ---
 
+## 🧪 Developer API & Unit Tests
+
+In addition to the end‑to‑end `train_model.py` script, this project now includes a
+modular, test‑driven pipeline in the `src/` and `tests/` directories:
+
+- `src/data_loader.py` – Data loading, cleaning, and target normalization.
+- `src/preprocessor.py` – Missing‑value handling, scaling, encoding, class balancing.
+- `src/model.py` – Model training, evaluation, cross‑validation, and persistence.
+- `tests/` – 42 unit tests covering data loading, preprocessing, and modeling.
+
+Run the full test suite:
+
+pytest tests/ -v --cov=src --cov-report=term-missing
+
+
+These modules mirror the production behavior of `train_model.py` and make the
+pipeline easier to extend, debug, and reuse in other projects.
+
+
 ## 📊 Project Structure
 
 ```
