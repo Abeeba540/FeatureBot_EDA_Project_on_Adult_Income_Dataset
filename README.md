@@ -1,3 +1,6 @@
+Here’s a ready-to-copy full `README.md` that includes your original content plus the modular CLI line and Developer API section.
+
+```markdown
 # FeatureBot: Adult Income Prediction with Feature Engineering
 
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
@@ -32,7 +35,7 @@
 
 ### 1. Clone & Setup
 
-```bash
+```
 git clone https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset.git
 cd FeatureBot_EDA_Project_on_Adult_Income_Dataset
 
@@ -45,13 +48,14 @@ source venv/bin/activate  # Mac/Linux
 pip install -r requirements.txt
 ```
 
-### 2. Run Training
+### 2. Run Training (Full FeatureBot Pipeline)
 
-```bash
+```
 python train_model.py
 ```
 
 Expected output:
+
 ```
 Global seeds set to 42
 Data loaded: (48842, 15)
@@ -69,7 +73,7 @@ Results (reproducible):
 
 ### 3. Verify Reproducibility
 
-```bash
+```
 python train_model.py  # Run 1
 python train_model.py  # Run 2
 # Both should show identical Test AUC: 0.9075, F1: 0.6802
@@ -77,7 +81,8 @@ python train_model.py  # Run 2
 
 ### 4. View CI/CD Status
 
-**GitHub Actions:** https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset/actions
+**GitHub Actions:**  
+https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset/actions  
 
 Latest run should show: **✅ Reproducibility Tests #PASSED**
 
@@ -85,22 +90,31 @@ Latest run should show: **✅ Reproducibility Tests #PASSED**
 
 ## 🧪 Developer API & Unit Tests
 
-In addition to the end‑to‑end `train_model.py` script, this project now includes a
+In addition to the end‑to‑end `train_model.py` script, this project includes a
 modular, test‑driven pipeline in the `src/` and `tests/` directories:
 
 - `src/data_loader.py` – Data loading, cleaning, and target normalization.
 - `src/preprocessor.py` – Missing‑value handling, scaling, encoding, class balancing.
 - `src/model.py` – Model training, evaluation, cross‑validation, and persistence.
+- `src/main.py` – CLI entry point for the modular pipeline.
 - `tests/` – 42 unit tests covering data loading, preprocessing, and modeling.
 
 Run the full test suite:
 
+```
 pytest tests/ -v --cov=src --cov-report=term-missing
+```
 
+For the modular, test‑driven implementation, you can also run:
+
+```
+python src/main.py --data data/adult.csv --model logistic_regression
+```
 
 These modules mirror the production behavior of `train_model.py` and make the
 pipeline easier to extend, debug, and reuse in other projects.
 
+---
 
 ## 📊 Project Structure
 
@@ -134,6 +148,12 @@ FeatureBot_EDA_Project_on_Adult_Income_Dataset/
 │   └── workflows/
 │       └── tests.yml                   # GitHub Actions CI/CD
 │
+├── src/
+│   ├── data_loader.py                  # Modular data loading
+│   ├── preprocessor.py                 # Modular preprocessing
+│   ├── model.py                        # Modular modeling / evaluation
+│   └── main.py                         # Modular CLI entry point
+│
 └── docs/
     ├── ML_BEST_PRACTICES_COMPLETE_GUIDE.md
     ├── PRODUCTION_DEPLOYMENT_STEPS.md
@@ -163,7 +183,7 @@ FeatureBot_EDA_Project_on_Adult_Income_Dataset/
 | # | Feature | Type | Definition |
 |---|---------|------|-----------|
 | 1 | `age_education_interaction` | Numeric Interaction | age × educational_num |
-| 2 | `capital_net` | Numeric Derived | capital_gain - capital_loss |
+| 2 | `capital_net` | Numeric Derived | capital_gain − capital_loss |
 | 3 | `has_capital_gain` | Binary Indicator | 1 if capital_gain > 0 else 0 |
 | 4 | `has_capital_loss` | Binary Indicator | 1 if capital_loss > 0 else 0 |
 | 5 | `is_overtime` | Binary Indicator | 1 if hours_per_week > 40 else 0 |
@@ -177,7 +197,7 @@ FeatureBot_EDA_Project_on_Adult_Income_Dataset/
 - ❌ `is_married` – 1.92× TPR disparity (gender bias proxy) – **Excluded**
 - ❌ `age_married_interaction` – Built on high-risk feature – **Excluded**
 
-**Fairness Trade-off:** -0.56% F1 for major fairness improvement. Acceptable.
+**Fairness Trade-off:** −0.56% F1 for major fairness improvement. Acceptable.
 
 ---
 
@@ -195,7 +215,7 @@ Status: ✅ REPRODUCIBLE (identical across runs)
 ### Reproducibility Checklist
 
 | Criterion | Status | Implementation |
-|-----------|--------|-----------------|
+|-----------|--------|----------------|
 | Global Seeds | ✅ | `np.random.seed(42), random.seed(42)` |
 | Stratified Splits | ✅ | `stratify=y, random_state=42` |
 | CV Strategy | ✅ | `StratifiedKFold(5, random_state=42)` |
@@ -208,11 +228,11 @@ Status: ✅ REPRODUCIBLE (identical across runs)
 
 ## 📊 Dataset
 
-- **Source:** [UCI Adult Census Dataset](https://archive.ics.uci.edu/dataset/2/adult)
-- **Rows:** 48,842
-- **Features:** 14 original + 9 engineered = 23 total
-- **Target:** Binary income (`<=50K`: 0, `>50K`: 1)
-- **Class Distribution:** 76.1% low-income, 23.9% high-income
+- **Source:** [UCI Adult Census Dataset](https://archive.ics.uci.edu/dataset/2/adult)  
+- **Rows:** 48,842  
+- **Features:** 14 original + 9 engineered = 23 total  
+- **Target:** Binary income (`<=50K`: 0, `>50K`: 1)  
+- **Class Distribution:** 76.1% low-income, 23.9% high-income  
 - **Location:** `data/adult.csv`
 
 ---
@@ -243,22 +263,23 @@ Status: ✅ REPRODUCIBLE (identical across runs)
 ### Performance Improvement
 
 | Cycle | AUC | F1 | Change vs. Baseline |
-|-------|-----|----|--------------------|
+|-------|-----|----|---------------------|
 | **Baseline** (14 features) | 0.9066 | 0.6571 | — |
 | **Cycle 1** (+5 features) | 0.9099 | 0.6652 | +0.33% AUC, +0.07% F1 |
 | **Cycle 2** (+4 features, final) | **0.9075** | **0.6802** | +0.09% AUC, **+2.31% F1** |
 
 **Notes:**
-- Cycle 2 used **test set** (final evaluation)
-- F1 improvement of +2.31% is significant for imbalanced classification
-- Fairness trade-off: -0.56% F1 from excluding high-risk features (acceptable)
+
+- Cycle 2 used **test set** (final evaluation)  
+- F1 improvement of +2.31% is significant for imbalanced classification  
+- Fairness trade-off: −0.56% F1 from excluding high-risk features (acceptable)
 
 ### Model Behavior
 
-- **High Recall (84%)** – Catches most high-income individuals
-- **Moderate Precision (57%)** – Some false positives acceptable for screening
-- **Low Overfitting** – Train/Val/Test metrics nearly identical
-- **Robust AUC (0.9075)** – Strong ranking ability across thresholds
+- **High Recall (84%)** – Catches most high-income individuals  
+- **Moderate Precision (57%)** – Some false positives acceptable for screening  
+- **Low Overfitting** – Train/Val/Test metrics nearly identical  
+- **Robust AUC (0.9075)** – Strong ranking ability across thresholds  
 
 ---
 
@@ -267,24 +288,27 @@ Status: ✅ REPRODUCIBLE (identical across runs)
 ### Subgroup Disparities Detected
 
 **Gender (Male vs. Female):**
-- TPR Disparity: 9.4%
-- Status: Monitored, acceptable range
+
+- TPR Disparity: 9.4%  
+- Status: Monitored, acceptable range  
 
 **Race (White vs. Non-white):**
-- TPR Disparity: 13.9%
-- Status: Monitored
+
+- TPR Disparity: 13.9%  
+- Status: Monitored  
 
 **Marital Status (Married vs. Single):**
-- TPR Disparity: 30.7% ❌ **High risk**
-- Mitigation: **Excluded** `is_married` feature
-- Trade-off: -0.56% F1 (acceptable for fairness)
+
+- TPR Disparity: 30.7% ❌ **High risk**  
+- Mitigation: **Excluded** `is_married` feature  
+- Trade-off: −0.56% F1 (acceptable for fairness)  
 
 ### Monitoring Plan
 
-- Daily fairness metric computation (framework ready)
-- Threshold alerts if disparities exceed 15%
-- Quarterly fairness audit
-- Stakeholder reporting (documented in audit trail)
+- Daily fairness metric computation (framework ready)  
+- Threshold alerts if disparities exceed 15%  
+- Quarterly fairness audit  
+- Stakeholder reporting (documented in audit trail)  
 
 ---
 
@@ -295,34 +319,36 @@ Status: ✅ REPRODUCIBLE (identical across runs)
 **File:** `.github/workflows/tests.yml`
 
 **Triggers:**
-- Every push to `main` or `master`
-- Every pull request
-- Manual trigger available
+
+- Every push to `main` or `master`  
+- Every pull request  
+- Manual trigger available  
 
 **Tests:**
-1. ✅ Checkout code
-2. ✅ Set up Python 3.10
-3. ✅ Install dependencies
-4. ✅ Run reproducibility test (Run 1)
-5. ✅ Run reproducibility test (Run 2)
-6. ✅ Compare results
-7. ✅ Report status
 
-**Status:** https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset/actions
+1. ✅ Checkout code  
+2. ✅ Set up Python 3.10  
+3. ✅ Install dependencies  
+4. ✅ Run reproducibility test (Run 1)  
+5. ✅ Run reproducibility test (Run 2)  
+6. ✅ Compare results  
+7. ✅ Report status  
+
+**Status:**  
+https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset/actions
 
 ---
 
 ## 📋 How to Use
 
-### Training a New Model
+### Training a New Model (Script/Notebook)
 
-```python
-# Python script or Jupyter notebook
+```
 from sklearn.model_selection import train_test_split
 import pandas as pd
 
 # Load data
-df = pd.read_csv('data/adult.csv')
+df = pd.read_csv("data/adult.csv")
 
 # Run train_model.py (all preprocessing handled)
 # Output: Test AUC, F1, and artifacts
@@ -330,7 +356,7 @@ df = pd.read_csv('data/adult.csv')
 
 ### Checking Results Reproducibility
 
-```bash
+```
 # Run 1
 python train_model.py > run1.log
 
@@ -343,18 +369,20 @@ python train_model.py > run2.log
 ### Exploring Features
 
 Open `outputs/feature_registry.csv` for:
-- Feature definitions
-- Dependencies
-- Fairness implications
-- Rationale for inclusion
+
+- Feature definitions  
+- Dependencies  
+- Fairness implications  
+- Rationale for inclusion  
 
 ### Reviewing Decisions
 
 See `outputs/audit_trail.csv` for:
-- When each feature was added
-- Fairness audit results
-- Decision to exclude high-risk features
-- Reproducibility verification
+
+- When each feature was added  
+- Fairness audit results  
+- Decision to exclude high-risk features  
+- Reproducibility verification  
 
 ---
 
@@ -373,7 +401,7 @@ Data (adult.csv)
   └─ 9 engineered features added
     ↓
 [Model Training]
-  └─ LogisticRegression(random_state=42, solver='lbfgs')
+  └─ LogisticRegression(random_state=42, solver="lbfgs")
     ↓
 [Evaluation]
   ├─ Train: AUC=0.9071, F1=0.6812
@@ -396,7 +424,8 @@ joblib==1.5.2
 ```
 
 Install via:
-```bash
+
+```
 pip install -r requirements.txt
 ```
 
@@ -406,7 +435,8 @@ pip install -r requirements.txt
 
 **✅ LIVE MODEL - Available 24/7**
 
-Try it now: [https://featurebot-uci-adult-income-dataset.onrender.com/health](https://featurebot-uci-adult-income-dataset.onrender.com/health)
+Try it now:  
+https://featurebot-uci-adult-income-dataset.onrender.com/health
 
 ### API Endpoints
 
@@ -417,15 +447,15 @@ Try it now: [https://featurebot-uci-adult-income-dataset.onrender.com/health](ht
 
 ### Deployment Status
 
-- **Platform:** Render.com
-- **Status:** ✅ LIVE
-- **Uptime:** 99.9%
-- **Last Updated:** December 17, 2025
-- **Auto-Deploy:** Enabled
+- **Platform:** Render.com  
+- **Status:** ✅ LIVE  
+- **Uptime:** 99.9%  
+- **Last Updated:** December 17, 2025  
+- **Auto-Deploy:** Enabled  
 
 ### Live Response Example
 
-```json
+```
 {
   "model": "FeatureBot v1.0",
   "status": "healthy",
@@ -435,27 +465,30 @@ Try it now: [https://featurebot-uci-adult-income-dataset.onrender.com/health](ht
 
 ### How to Test
 
-1. Open in your browser: https://featurebot-uci-adult-income-dataset.onrender.com/health
-2. You'll see JSON response with model status
-3. Response time: ~500ms
+1. Open in your browser:  
+   https://featurebot-uci-adult-income-dataset.onrender.com/health  
+2. You’ll see JSON response with model status  
+3. Response time: ~500ms  
 
 ### Performance Metrics
 
-- **Model Accuracy:** 90.75% AUC
-- **Fairness Score:** Bias mitigated (30.7% demographic gap reduced)
-- **API Response Time:** <500ms
-- **Deployment:** 99.9% uptime
-- **Auto-deploy:** Yes (GitHub integrated)
+- **Model Accuracy:** 90.75% AUC  
+- **Fairness Score:** Bias mitigated (30.7% demographic gap reduced)  
+- **API Response Time:** <500ms  
+- **Deployment:** 99.9% uptime  
+- **Auto-deploy:** Yes (GitHub integrated)  
+
+---
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Commit changes (`git commit -am 'Add feature'`)
-4. Push to branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
+1. Fork the repository  
+2. Create a feature branch (`git checkout -b feature/your-feature`)  
+3. Commit changes (`git commit -am "Add feature"`)  
+4. Push to branch (`git push origin feature/your-feature`)  
+5. Open a Pull Request  
 
 **Note:** All PRs trigger GitHub Actions verification.
 
@@ -463,17 +496,17 @@ Contributions are welcome! Please:
 
 ## 📧 Contact & Support
 
-- **Author:** Ummu Abeeba
-- **Email:** abeeba2430@gmail.com
-- **GitHub:** [@Abeeba540](https://github.com/Abeeba540)
-- **Issues:** [GitHub Issues](https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset/discussions)
+- **Author:** Ummu Abeeba  
+- **Email:** abeeba2430@gmail.com  
+- **GitHub:** [@Abeeba540](https://github.com/Abeeba540)  
+- **Issues:** https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset/issues  
+- **Discussions:** https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset/discussions  
 
 ---
 
 ## 📚 References
 
-- **Dataset:** [UCI Machine Learning Repository - Adult](https://archive.ics.uci.edu/dataset/2/adult)
+- **Dataset:** [UCI Machine Learning Repository – Adult](https://archive.ics.uci.edu/dataset/2/adult)
 
 ---
 
@@ -496,6 +529,7 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 ---
 
-**Last Updated:** December 12, 2025  
+**Last Updated:** December 18, 2025  
 **Created by:** Ummu Abeeba  
 **Repository:** https://github.com/Abeeba540/FeatureBot_EDA_Project_on_Adult_Income_Dataset
+```
